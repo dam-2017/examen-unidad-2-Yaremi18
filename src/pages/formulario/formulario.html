@@ -1,0 +1,68 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>
+      Examen: Inicio de sesión
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <ion-card>
+    <ion-card-header>
+      Introduce tu usuario y contraseña
+    </ion-card-header>
+
+    <ion-card-content>
+      <form [formGroup]="myForm" (ngSubmit)="saveData()" novalidate>
+        <ion-list>
+          <ion-item>
+            <p>{{datos.Informacion}}</p>
+          </ion-item>
+
+          <ion-item>
+            <ion-label floating >Nombre</ion-label>
+            <ion-input type="text" formControlName="nombre" [(ngModel)] ="nombre"></ion-input>
+          </ion-item>
+          <ion-item *ngIf="myForm.get('nombre').errors && myForm.get('nombre').dirty">
+            <p *ngIf="myForm.get('nombre').hasError('required')">El nombre es requerido</p>           
+          </ion-item>
+
+          <ion-item>
+            <ion-label floating >Apellido materno</ion-label>
+            <ion-input type="text" formControlName="apellido_mat" [(ngModel)] ="materno" ></ion-input>
+          </ion-item>
+           <ion-item *ngIf="myForm.get('apellido_mat').errors && myForm.get('apellido_mat').dirty">
+            <p *ngIf="myForm.get('apellido_mat').hasError('required')">El apellido materno es requerido</p>           
+          </ion-item>
+
+          <ion-item>
+            <ion-label floating >Apellido paterno</ion-label>
+            <ion-input type="text" formControlName="apellido_pat" [(ngModel)] ="paterno"></ion-input>
+          </ion-item>
+           <ion-item *ngIf="myForm.get('apellido_pat').errors && myForm.get('apellido_pat').dirty">
+            <p *ngIf="myForm.get('apellido_pat').hasError('required')">El apellido paterno es requerido</p>           
+          </ion-item>
+
+          <ion-item>
+            <ion-label floating >Fecha de nacimiento</ion-label>
+            <ion-input type="text" formControlName="fecha_nac" [(ngModel)] ="fecha"></ion-input>
+          </ion-item>
+           <ion-item *ngIf="myForm.get('fecha_nac').errors && myForm.get('fecha_nac').dirty">
+            <p *ngIf="myForm.get('fecha_nac').hasError('required')">La fecha de nacimiento es requerida</p>           
+            <p *ngIf="myForm.get('fecha_nac').hasError('pattern')">La fecha de nacimiento debe ser AAAA/MM/DD</p> 
+          </ion-item>
+
+          
+        </ion-list>
+
+        <button ion-button block type="submit" [disabled]="myForm.invalid">Validar</button>
+      </form>
+      <ion-list>
+      <ion-item>
+            <ion-label stacked >RFC</ion-label>
+            <ion-input [(ngModel)] = "rfcCreado"></ion-input>
+          </ion-item>
+      </ion-list>
+    </ion-card-content>
+  </ion-card>
+</ion-content>

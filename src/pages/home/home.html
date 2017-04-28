@@ -1,0 +1,47 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>
+      Examen: Inicio de sesión
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <ion-card>
+    <ion-card-header>
+      Introduce tu usuario y contraseña
+    </ion-card-header>
+
+    <ion-card-content>
+      <form [formGroup]="myForm" (ngSubmit)="saveData()" novalidate>
+        <ion-list>
+          <ion-item>
+            <ion-label floating >Usuario</ion-label>
+            <ion-input formControlName="usuario" [(ngModel)] ="usuar"></ion-input>
+          </ion-item>
+
+          <ion-item *ngIf="myForm.get('usuario').errors && myForm.get('usuario').dirty">
+            <p *ngIf="myForm.get('usuario').hasError('required')">El usuario es requerido</p>
+            <p *ngIf="myForm.get('usuario').hasError('minlength')">El usuario requiere al menos 8 caracteres</p>
+            <p *ngIf="myForm.get('usuario').hasError('pattern')">El usuario solo requiere minusculas</p>
+            
+          </ion-item>
+
+          <ion-item>
+            <ion-label floating >Contraseña</ion-label>
+            <ion-input type="password" formControlName="contraseña" [(ngModel)] ="contra"></ion-input>
+          </ion-item>
+
+          <ion-item *ngIf="myForm.get('contraseña').errors && myForm.get('contraseña').dirty">
+            <p *ngIf="myForm.get('contraseña').hasError('required')">La contraseña es requerida</p>
+            <p *ngIf="myForm.get('contraseña').hasError('minlength')">La contraseña requiere al menos 6 caracteres</p>
+            <p *ngIf="myForm.get('contraseña').hasError('pattern')">La contraseña debe contener al menos ..</p>
+            
+          </ion-item>
+        </ion-list>
+
+        <button ion-button block type="submit" [disabled]="myForm.invalid">Iniciar sesión</button>
+      </form>
+    </ion-card-content>
+  </ion-card>
+</ion-content>
